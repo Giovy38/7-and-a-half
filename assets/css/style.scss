@@ -1,5 +1,6 @@
 @import './colors';
 @import './table-section';
+@import './call-button-section';
 
 *{
     padding: 0;
@@ -9,4 +10,8 @@
 
 body{
     background: $bg-color ;
+}
+
+.hidden{
+    display: none;
 }

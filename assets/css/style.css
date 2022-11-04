@@ -34,6 +34,54 @@
   margin-bottom: 0px;
 }
 
+#call-card-button-section .call-card-button-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#call-card-button-section .call-card-button-container .button-container {
+  background-color: rgba(0, 0, 0, 0.348);
+  z-index: 5;
+  width: 50%;
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  border-radius: 10px;
+  border: none;
+}
+#call-card-button-section .call-card-button-container .button-container button {
+  width: 200px;
+  height: 80px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+#call-card-button-section .call-card-button-container .button-container #call-card-button {
+  background-color: #11b111;
+}
+#call-card-button-section .call-card-button-container .button-container #call-card-button:hover {
+  background-color: #036f03;
+  color: #fff;
+}
+#call-card-button-section .call-card-button-container .button-container #stop-call-button {
+  background-color: #bb1a04;
+}
+#call-card-button-section .call-card-button-container .button-container #stop-call-button:hover {
+  background-color: #761205;
+  color: #fff;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -42,4 +90,8 @@
 
 body {
   background: linear-gradient(to right, #B79891, #6b5855);
+}
+
+.hidden {
+  display: none;
 }/*# sourceMappingURL=style.css.map */
