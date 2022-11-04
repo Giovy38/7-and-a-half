@@ -67,6 +67,10 @@
   font-size: 20px;
   text-transform: uppercase;
 }
+#call-card-button-section .call-card-button-container .button-container h1 {
+  color: #fff;
+  font-size: 35px;
+}
 #call-card-button-section .call-card-button-container .button-container #call-card-button {
   background-color: #11b111;
 }

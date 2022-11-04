@@ -5,7 +5,7 @@ buttonCall.addEventListener('click', cardCall);
 const buttonStop = document.getElementById('stop-call-button');
 buttonStop.addEventListener('click', cardStop);
 
-
+let winner = 'player'
 
 const cardsimg = [
     // oro
@@ -109,7 +109,7 @@ function changeCard(){
     let random1 = Math.floor(Math.random() * maxCard);
     let random2 = Math.floor(Math.random() * maxCard);
 
-    while(random1 === 0 || random2 === 0){
+    while(random1 === 0 || random2 === 0 || random1 === random2) {
         random1 = Math.floor(Math.random() * maxCard);
         random2 = Math.floor(Math.random() * maxCard);
     }
@@ -122,13 +122,7 @@ function changeCard(){
         totalComScore += cardsValue[random1];
         cardsimg[random1] = 0;
         cardsimg[random2] = 0;
-
-        console.log('com ', totalComScore, 'player ', totalPlayerScore);
-
       }, 1700);
-
-
-
 }
 
 
@@ -144,8 +138,32 @@ function buttonSee(){
 }
 
 
+
 function cardCall(){
     buttonSection.classList.add('hidden');
+
+    let maxCard = cardsimg.length;
+    let random1 = Math.floor(Math.random() * maxCard);
+
+    while(cardsimg[random1] === 0){
+        random1 = Math.floor(Math.random() * maxCard);
+    }
+
+
+    const card = document.createElement('img');
+    card.src = cardsimg[random1];
+    const playerTable = document.getElementById('table-container-player');
+    playerTable.appendChild(card);
+
+    totalPlayerScore += cardsValue[random1];
+    cardsimg[random1] = 0;
+
+    if(totalPlayerScore > 7.5){
+        winner = 'com';
+        winnerCheck();
+    }
+
+
     setTimeout(function() {
         buttonSection.classList.remove('hidden');
       }, 3000);
@@ -153,10 +171,54 @@ function cardCall(){
 
 function cardStop(){
     buttonSection.classList.add('hidden');
+
+    while(totalComScore < totalPlayerScore && totalComScore < 7.5){
+        let maxCard = cardsimg.length;
+        let random1 = Math.floor(Math.random() * maxCard);
+    
+        while(random1 === 0){
+            random1 = Math.floor(Math.random() * maxCard);
+        }
+
+    
+        const card = document.createElement('img');
+        card.src = cardsimg[random1];
+        const playerTable = document.getElementById('table-container-com');
+        playerTable.appendChild(card);
+    
+        totalComScore += cardsValue[random1];
+        cardsimg[random1] = 0;
+    }
+
+    if(totalComScore > 7.5){
+        winner = 'player';
+    } else{
+        winner = 'com';
+    }
+
+    setTimeout(function() {
+        winnerCheck();
+    }, 2000);
+    
+   
+
+}
+
+function winnerCheck(){
+
     const buttonDiv = document.getElementById('button-container');
+    const winTitle = document.createElement('h1');
     const restartButton = document.createElement('button');
+    winTitle.id = 'winner';
     restartButton.id = 'replay-button';
+    if(winner === 'player') {
+        winTitle.innerHTML = `Congratulations! You Win`;
+    } else {
+        winTitle.innerHTML = `So Sorry! You Lose`;
+    }
+    
     restartButton.innerHTML = 'Play Again';
+    buttonDiv.appendChild(winTitle);
     buttonDiv.appendChild(restartButton);
     buttonCall.remove();
     buttonStop.remove();
@@ -165,7 +227,6 @@ function cardStop(){
         buttonSection.classList.remove('hidden');
         restartButton.addEventListener('click', replay)
       }, 2000);
-
 }
 
 function replay(){
